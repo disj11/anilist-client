@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {ApolloProvider} from '@apollo/react-hooks';
+import {Route, HashRouter} from 'react-router-dom';
+import client from './AnilistClient';
+import {Home} from "./pages/home";
+import {Detail} from "./pages/detail";
+import 'antd/dist/antd.css';
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ApolloProvider client={client}>
+            <HashRouter>
+                <Route exact={true} path={"/"} component={Home} />
+                <Route path={"/details/:id"} component={Detail} />
+            </HashRouter>
+        </ApolloProvider>
+    );
 }
 
 export default App;

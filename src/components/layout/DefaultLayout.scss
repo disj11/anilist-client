@@ -1,0 +1,45 @@
+$header_height: 60px;
+$sidebar_width: 200px;
+
+.default-layout {
+  width: 100%;
+  height: 100%;
+
+  .default-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $header_height;
+  }
+
+  .default-content-layout {
+    position: absolute;
+    top: $header_height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    .default-sidebar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: $sidebar_width;
+      background: #fff;
+      padding: 10px;
+    }
+    .default-content {
+      position: absolute;
+      top: 0;
+      left: $sidebar_width;
+      right: 0;
+      bottom: 0;
+      padding: 30px;
+      & > div {
+        padding: 30px;
+        background: #fff;
+        border-radius: 4px;
+      }
+    }
+  }
+}
