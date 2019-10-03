@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const ANIMATION_LIST = gql`
-    query ($page: Int, $perPage: Int, $isAdult: Boolean){
+    query ($page: Int, $perPage: Int, $isAdult: Boolean, $sort: MediaSort){
         Page(page:$page, perPage:$perPage) {
             pageInfo{
                 total,
@@ -10,7 +10,7 @@ export const ANIMATION_LIST = gql`
                 lastPage,
                 hasNextPage
             },
-            media(isAdult: $isAdult, sort: [TRENDING_DESC]) {
+            media(isAdult: $isAdult, sort: [$sort]) {
                 id
                 title{
                     romaji

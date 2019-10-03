@@ -4,19 +4,24 @@ import {ANIMATION_LIST} from "../queries/queries";
 import {DefaultLayout} from "../components/layout";
 import {FullScreenSpin} from "../components/spin";
 import {SimpleCard} from "../components/card";
-import {Pagination} from "antd";
+import {Pagination, Select} from "antd";
+const {Option} = Select;
 
 type Props = {
     page: number;
     pageSize: number;
-    onChange: (page: number, pageSize?: number) => void;
+    sort?: string;
+    onPageChange: (page: number, pageSize?: number) => void;
+    onSortChange: (sort: string) => void;
 }
 
-const AnimationList = ({page, pageSize, onChange}: Props) => {
+const AnimationList = ({page, pageSize, sort, onPageChange, onSortChange}: Props) => {
+    const sortString = sort || 'UPDATED_AT_DESC';
     const { loading, error, data } = useQuery(ANIMATION_LIST, {
         variables: {
             page: page,
-            perPage: pageSize
+            perPage: pageSize,
+            sort: sortString
         }
     });
 
@@ -35,16 +40,38 @@ const AnimationList = ({page, pageSize, onChange}: Props) => {
         />
     ));
 
+    const handleChange = (value: string) => {
+        onSortChange(value);
+    };
+
     return <DefaultLayout>
-        <div style={{padding: 10}}>Total of {pageInfo.total}</div>
+        <div style={{padding: 10, fontSize: '1.5em', marginBottom: 10}}>Total of {pageInfo.total}</div>
+        <div style={{marginBottom: 10, marginLeft: 10}}>
+            <Pagination
+                showSizeChanger
+                onShowSizeChange={onPageChange}
+                defaultCurrent={page}
+                defaultPageSize={pageSize}
+                onChange={onPageChange}
+                total={pageInfo.total}
+                style={{float: "left"}}
+            />
+            <Select defaultValue={sortString} style={{ width: 160, float: "right" }} onChange={handleChange}>
+                <Option value="UPDATED_AT_DESC">Updated at</Option>
+                <Option value="TRENDING_DESC">Trending</Option>
+                <Option value="FAVOURITES_DESC">Favourites</Option>
+                <Option value="SCORE_DESC">Score</Option>
+            </Select>
+        </div>
+        <div style={{clear:"both"}}></div>
         {render}
         <div style={{marginTop: 10, marginLeft: 10}}>
             <Pagination
                 showSizeChanger
-                onShowSizeChange={onChange}
+                onShowSizeChange={onPageChange}
                 defaultCurrent={page}
                 defaultPageSize={pageSize}
-                onChange={onChange}
+                onChange={onPageChange}
                 total={pageInfo.total}
             />
         </div>

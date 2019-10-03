@@ -4,7 +4,8 @@ import {AnimationList} from "../../modules";
 type Props = {};
 type State = {
     page: number;
-    perPage: number;
+    pageSize: number;
+    sort: string;
 }
 
 class Home extends Component<Props, State> {
@@ -12,22 +13,34 @@ class Home extends Component<Props, State> {
         super(props);
         this.state = {
             page: 1,
-            perPage: 10
+            pageSize: 10,
+            sort: ''
         };
     }
 
-    onShowSizeChange = (current: number, pageSize: number = this.state.perPage) => {
+    onPageChange = (current: number, pageSize: number = this.state.pageSize) => {
         this.setState({
             page: current,
-            perPage: pageSize
+            pageSize: pageSize,
+            sort: this.state.sort
         })
+    };
+
+    onSortChange = (sort: string) => {
+        this.setState({
+            page: this.state.page,
+            pageSize: this.state.pageSize,
+            sort: sort
+        });
     };
 
     render() {
         return <AnimationList
             page={this.state.page}
-            pageSize={this.state.perPage}
-            onChange={this.onShowSizeChange}
+            pageSize={this.state.pageSize}
+            sort={this.state.sort}
+            onPageChange={this.onPageChange}
+            onSortChange={this.onSortChange}
         />
     }
 }
