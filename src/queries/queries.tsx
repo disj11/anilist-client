@@ -10,7 +10,7 @@ export const ANIMATION_LIST = gql`
                 lastPage,
                 hasNextPage
             },
-            media(isAdult: $isAdult) {
+            media(isAdult: $isAdult, sort: [TRENDING_DESC]) {
                 id
                 title{
                     romaji
