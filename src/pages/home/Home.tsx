@@ -5,7 +5,8 @@ type Props = {};
 type State = {
     page: number;
     pageSize: number;
-    sort: string;
+    sort?: string;
+    search?: string;
 }
 
 class Home extends Component<Props, State> {
@@ -13,24 +14,27 @@ class Home extends Component<Props, State> {
         super(props);
         this.state = {
             page: 1,
-            pageSize: 10,
-            sort: ''
+            pageSize: 10
         };
     }
 
     onPageChange = (current: number, pageSize: number = this.state.pageSize) => {
         this.setState({
             page: current,
-            pageSize: pageSize,
-            sort: this.state.sort
-        })
+            pageSize: pageSize
+        });
     };
 
     onSortChange = (sort: string) => {
         this.setState({
-            page: this.state.page,
-            pageSize: this.state.pageSize,
             sort: sort
+        });
+    };
+
+    onSearch = (value: string) => {
+        this.setState({
+            page: 1,
+            search: value
         });
     };
 
@@ -39,8 +43,10 @@ class Home extends Component<Props, State> {
             page={this.state.page}
             pageSize={this.state.pageSize}
             sort={this.state.sort}
+            search={this.state.search}
             onPageChange={this.onPageChange}
             onSortChange={this.onSortChange}
+            onSearch={this.onSearch}
         />
     }
 }

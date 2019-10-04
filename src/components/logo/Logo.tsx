@@ -1,13 +1,15 @@
-import React from "react";
+import React, {Component} from "react";
 
-const Logo = () => {
-    return (
-        <div style={{
-            width: '200px',
-            color: 'white',
-            fontSize: '2em'
-        }}>Anilist</div>
-    );
+class Logo extends Component<{className?: string}> {
+    render() {
+        return (
+            <div className={this.props.className || ''} style={{
+                width: '200px',
+                color: 'white',
+                fontSize: '2em'
+            }}>Anilist</div>
+        );
+    }
 };
 
 export default Logo;

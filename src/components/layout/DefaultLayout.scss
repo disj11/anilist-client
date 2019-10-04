@@ -11,6 +11,22 @@ $sidebar_width: 200px;
     left: 0;
     right: 0;
     height: $header_height;
+
+    .logo {
+      float: left;
+    }
+
+    .search {
+      line-height: inherit;
+      float: left;
+      width: 300px;
+    }
+
+    &:after {
+      display: block;
+      clear: both;
+      content: '';
+    }
   }
 
   .default-content-layout {

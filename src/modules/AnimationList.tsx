@@ -11,22 +11,25 @@ type Props = {
     page: number;
     pageSize: number;
     sort?: string;
+    search?: string;
     onPageChange: (page: number, pageSize?: number) => void;
     onSortChange: (sort: string) => void;
+    onSearch: (value: string) => void;
 }
 
-const AnimationList = ({page, pageSize, sort, onPageChange, onSortChange}: Props) => {
-    const sortString = sort || 'UPDATED_AT_DESC';
+const AnimationList = ({page, pageSize, sort, search, onPageChange, onSortChange, onSearch}: Props) => {
+    const sortString = sort || 'TRENDING_DESC';
     const { loading, error, data } = useQuery(ANIMATION_LIST, {
         variables: {
             page: page,
             perPage: pageSize,
-            sort: sortString
+            sort: sortString,
+            search: search || undefined
         }
     });
 
     if (loading) return <DefaultLayout><FullScreenSpin/></DefaultLayout>;
-    if (error) return <DefaultLayout><p>Error :(</p></DefaultLayout>;
+    if (error) return <DefaultLayout onSearch={onSearch}><p>Error :(</p></DefaultLayout>;
 
     const pageInfo: any = data.Page.pageInfo;
     const mediaList: Array<any> = data.Page.media;
@@ -40,11 +43,7 @@ const AnimationList = ({page, pageSize, sort, onPageChange, onSortChange}: Props
         />
     ));
 
-    const handleChange = (value: string) => {
-        onSortChange(value);
-    };
-
-    return <DefaultLayout>
+    return <DefaultLayout onSearch={onSearch}>
         <div style={{padding: 10, fontSize: '1.5em', marginBottom: 10}}>Total of {pageInfo.total}</div>
         <div style={{marginBottom: 10, marginLeft: 10}}>
             <Pagination
@@ -56,14 +55,14 @@ const AnimationList = ({page, pageSize, sort, onPageChange, onSortChange}: Props
                 total={pageInfo.total}
                 style={{float: "left"}}
             />
-            <Select defaultValue={sortString} style={{ width: 160, float: "right" }} onChange={handleChange}>
-                <Option value="UPDATED_AT_DESC">Updated at</Option>
+            <Select defaultValue={sortString} style={{ width: 160, float: "right" }} onChange={onSortChange}>
                 <Option value="TRENDING_DESC">Trending</Option>
                 <Option value="FAVOURITES_DESC">Favourites</Option>
                 <Option value="SCORE_DESC">Score</Option>
+                <Option value="START_DATE_DESC">Start date</Option>
             </Select>
         </div>
-        <div style={{clear:"both"}}></div>
+        <div style={{clear:"both"}} />
         {render}
         <div style={{marginTop: 10, marginLeft: 10}}>
             <Pagination
