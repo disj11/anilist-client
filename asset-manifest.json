@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/anilist-client/static/css/main.2e9e664a.chunk.css",
+    "main.js": "/anilist-client/static/js/main.7226cce8.chunk.js",
+    "main.js.map": "/anilist-client/static/js/main.7226cce8.chunk.js.map",
+    "runtime-main.js": "/anilist-client/static/js/runtime-main.f7e5102d.js",
+    "runtime-main.js.map": "/anilist-client/static/js/runtime-main.f7e5102d.js.map",
+    "static/css/2.653462cc.chunk.css": "/anilist-client/static/css/2.653462cc.chunk.css",
+    "static/js/2.9dd0e3a9.chunk.js": "/anilist-client/static/js/2.9dd0e3a9.chunk.js",
+    "static/js/2.9dd0e3a9.chunk.js.map": "/anilist-client/static/js/2.9dd0e3a9.chunk.js.map",
+    "index.html": "/anilist-client/index.html",
+    "precache-manifest.d342f88176b5d11ff091157e882343a5.js": "/anilist-client/precache-manifest.d342f88176b5d11ff091157e882343a5.js",
+    "service-worker.js": "/anilist-client/service-worker.js",
+    "static/css/2.653462cc.chunk.css.map": "/anilist-client/static/css/2.653462cc.chunk.css.map",
+    "static/css/main.2e9e664a.chunk.css.map": "/anilist-client/static/css/main.2e9e664a.chunk.css.map"
+  }
+}
