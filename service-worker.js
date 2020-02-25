@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/anilist-client/precache-manifest.ac6609ae9d42f267057aeccf1fdc709d.js"
+  "/anilist-client/precache-manifest.8881802f63943f40d3bbfe33128c0e62.js"
 );
 
 self.addEventListener('message', (event) => {
