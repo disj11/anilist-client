@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/anilist-client/static/css/main.9ae839f6.chunk.css",
-    "main.js": "/anilist-client/static/js/main.78eb3437.chunk.js",
-    "main.js.map": "/anilist-client/static/js/main.78eb3437.chunk.js.map",
+    "main.css": "/anilist-client/static/css/main.a1a5bedb.chunk.css",
+    "main.js": "/anilist-client/static/js/main.d0fa40e9.chunk.js",
+    "main.js.map": "/anilist-client/static/js/main.d0fa40e9.chunk.js.map",
     "runtime-main.js": "/anilist-client/static/js/runtime-main.f7e5102d.js",
     "runtime-main.js.map": "/anilist-client/static/js/runtime-main.f7e5102d.js.map",
     "static/css/2.653462cc.chunk.css": "/anilist-client/static/css/2.653462cc.chunk.css",
     "static/js/2.c5e71df7.chunk.js": "/anilist-client/static/js/2.c5e71df7.chunk.js",
     "static/js/2.c5e71df7.chunk.js.map": "/anilist-client/static/js/2.c5e71df7.chunk.js.map",
     "index.html": "/anilist-client/index.html",
-    "precache-manifest.2dc660b02b3f85ee84a7a47cd697f42b.js": "/anilist-client/precache-manifest.2dc660b02b3f85ee84a7a47cd697f42b.js",
+    "precache-manifest.c8910ce64acdf929f5a1e4044bb2ef04.js": "/anilist-client/precache-manifest.c8910ce64acdf929f5a1e4044bb2ef04.js",
     "service-worker.js": "/anilist-client/service-worker.js",
     "static/css/2.653462cc.chunk.css.map": "/anilist-client/static/css/2.653462cc.chunk.css.map",
-    "static/css/main.9ae839f6.chunk.css.map": "/anilist-client/static/css/main.9ae839f6.chunk.css.map"
+    "static/css/main.a1a5bedb.chunk.css.map": "/anilist-client/static/css/main.a1a5bedb.chunk.css.map"
   }
 }
