@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "00436ea0259cd6b49710db8cddf6d1db",
+    "revision": "9a9867808010f08bd66cb5b2fdb3ae5b",
     "url": "/anilist-client/index.html"
   },
   {
@@ -8,15 +8,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/anilist-client/static/css/2.653462cc.chunk.css"
   },
   {
-    "revision": "2d22adc6651a46658171",
-    "url": "/anilist-client/static/css/main.a1a5bedb.chunk.css"
+    "revision": "84e7fd37d97a232f20df",
+    "url": "/anilist-client/static/css/main.37ef97aa.chunk.css"
   },
   {
     "revision": "8e2eb9da9e38ef24f2fe",
     "url": "/anilist-client/static/js/2.c5e71df7.chunk.js"
   },
   {
-    "revision": "2d22adc6651a46658171",
+    "revision": "84e7fd37d97a232f20df",
     "url": "/anilist-client/static/js/main.d0fa40e9.chunk.js"
   },
   {
