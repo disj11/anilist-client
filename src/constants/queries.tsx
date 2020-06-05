@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const ANIMATION_LIST = gql`
-    query {
-        Page {
+    query($page: Int = 1, $perPage: Int = 10) {
+        Page(page: $page, perPage: $perPage) {
             pageInfo {
                 total,
                 perPage,
@@ -22,7 +22,8 @@ export const ANIMATION_LIST = gql`
                     large,
                     medium
                 },
-                genres
+                genres,
+                description
             }
         }
     }
