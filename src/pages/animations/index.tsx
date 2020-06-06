@@ -2,29 +2,30 @@ import React, {useCallback, useState} from "react";
 import {withRouter} from "next/router";
 import {WithRouterProps} from "next/dist/client/with-router";
 import {useQuery} from "@apollo/react-hooks";
-import {ANIMATION_LIST} from "../../constants/queries";
-import {Card, CardActionArea, CardContent, CardMedia, Container, Grid, Typography} from "@material-ui/core";
-import {Pagination} from '@material-ui/lab';
-import {makeStyles} from '@material-ui/styles';
+import {PAGE} from "../../constants/queries";
+import {Box, Card, CardMedia, Container, Grid, LinearProgress} from "@material-ui/core";
+import {makeStyles} from '@material-ui/core/styles';
+import Layout from "../../templates/layout/Layout";
+import {Pagination} from "@material-ui/lab";
 
-const useStyles = makeStyles({
-    card: {
-        maxWidth: 345,
-        height: 380,
+const useStyles = makeStyles((theme) => ({
+    container: {
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
     },
-    media: {
-        height: 180,
+    cardMedia: {
+        height: 265,
     },
-});
+}));
 
 const Animations = ({router}: WithRouterProps) => {
     const classes = useStyles();
     const [{page, perPage}, setPageInfo] = useState({
         page: Number(router.query.page) || 1,
-        perPage: Number(router.query.perPage) || 10,
+        perPage: Number(router.query.perPage) || 30,
     });
 
-    const {loading, error, data} = useQuery(ANIMATION_LIST, {
+    const {loading, error, data} = useQuery(PAGE, {
         variables: {
             page: page,
             perPage: perPage,
@@ -38,46 +39,41 @@ const Animations = ({router}: WithRouterProps) => {
         })
     }, [page, perPage]);
 
-    if (loading) return <div>Loading...</div>;
-    const media = data.Page.media;
-    const pageInfo = data.Page.pageInfo;
+    const media = data?.Page?.media || [];
+    const pageInfo = data?.Page?.pageInfo || {total: 0, currentPage: 1};
     const animations = media.map((data: any) => {
         return (
-            <Grid item={true} key={data.id}>
-                <Card className={classes.card}>
-                    <CardActionArea>
-                        <CardMedia
-                            className={classes.media}
-                            image={data.coverImage.large}
-                            title={data.title.romaji}
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {data.title.romaji}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {data.description}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
+            <Grid item key={data.id} xs={6} sm={4} md={2}>
+                <Card>
+                    <CardMedia
+                        className={classes.cardMedia}
+                        image={data.coverImage.large}
+                        title={data.title.userPreferred}
+                    />
                 </Card>
             </Grid>
         )
     })
 
-    console.log(media, pageInfo);
     return (
-        <Container>
-            <Grid container={true} spacing={3}>
-                {animations}
-            </Grid>
-            <Pagination
-                page={pageInfo.currentPage}
-                count={Math.ceil(pageInfo.total / perPage)}
-                onChange={handleChangePage}
-                color="primary"
-            />
-        </Container>
+        <Layout>
+            {loading && <LinearProgress color={"secondary"}/>}
+            <Container className={classes.container} maxWidth={"lg"}>
+                <Grid container spacing={4}>
+                    {animations}
+                </Grid>
+                <Box component={"div"} mt={2}>
+                    <Pagination
+                        page={pageInfo.currentPage}
+                        count={Math.ceil(pageInfo.total / perPage)}
+                        onChange={handleChangePage}
+                        color="primary"
+                        variant="outlined"
+                        shape="rounded"
+                    />
+                </Box>
+            </Container>
+        </Layout>
     )
 }
 
