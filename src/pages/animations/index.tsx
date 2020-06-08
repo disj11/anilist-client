@@ -3,10 +3,11 @@ import {withRouter} from "next/router";
 import {WithRouterProps} from "next/dist/client/with-router";
 import {useQuery} from "@apollo/react-hooks";
 import {PAGE} from "../../constants/queries";
-import {Box, Card, CardMedia, Container, Grid, LinearProgress} from "@material-ui/core";
+import {Box, Card, Container, Grid} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import Layout from "../../templates/layout/Layout";
 import {Pagination} from "@material-ui/lab";
+import {Image} from "../../components/atoms/Image";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -37,15 +38,15 @@ const Animations = ({router}: WithRouterProps) => {
             page: page,
             perPage: perPage,
         })
-    }, [page, perPage]);
+    }, []);
 
     const media = data?.Page?.media || [];
     const pageInfo = data?.Page?.pageInfo || {total: 0, currentPage: 1};
     const animations = media.map((data: any) => {
         return (
-            <Grid item key={data.id} xs={6} sm={4} md={2}>
+            <Grid item key={data.id} xs={6} sm={3} md={2}>
                 <Card>
-                    <CardMedia
+                    <Image
                         className={classes.cardMedia}
                         image={data.coverImage.large}
                         title={data.title.userPreferred}
@@ -56,8 +57,7 @@ const Animations = ({router}: WithRouterProps) => {
     })
 
     return (
-        <Layout>
-            {loading && <LinearProgress color={"secondary"}/>}
+        <Layout loading={loading}>
             <Container className={classes.container} maxWidth={"lg"}>
                 <Grid container spacing={4}>
                     {animations}

@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from "react";
-import {AppBar, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, LinearProgress, Toolbar, Typography} from "@material-ui/core";
 
-const Layout: FunctionComponent = ({children}) => {
+const Layout: FunctionComponent<{loading?: boolean}> = ({loading, children}) => {
     return (
         <React.Fragment>
             <AppBar position={"sticky"}>
@@ -10,6 +10,7 @@ const Layout: FunctionComponent = ({children}) => {
                         Anime
                     </Typography>
                 </Toolbar>
+                {loading && <LinearProgress color={"secondary"}/>}
             </AppBar>
             <main>
                 {children}

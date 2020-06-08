@@ -8,14 +8,6 @@ import {CssBaseline} from "@material-ui/core";
 import Head from "next/head";
 
 const MyApp = ({Component, pageProps}: AppProps) => {
-    React.useEffect(() => {
-        // Remove the server-side injected CSS.
-        const jssStyles = document.querySelector('#jss-server-side');
-        if (jssStyles && jssStyles.parentElement) {
-            jssStyles.parentElement.removeChild(jssStyles);
-        }
-    }, []);
-
     return (
         <React.Fragment>
             <Head>
