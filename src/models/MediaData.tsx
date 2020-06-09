@@ -1,13 +1,21 @@
-export default interface Data {
+export interface MediaData {
     Page: Page;
 }
 
-export interface Page {
+export interface TrendData {
+    trending: {media: Array<Media>}
+    season: {media: Array<Media>}
+    nextSeason: {media: Array<Media>}
+    popular: {media: Array<Media>}
+    top: {media: Array<Media>}
+}
+
+interface Page {
     pageInfo: PageInfo;
     media: Array<Media>;
 }
 
-export interface PageInfo {
+interface PageInfo {
     total: number;
     perPage: number;
     currentPage: number;
@@ -23,10 +31,10 @@ export interface Media {
     title: Title;
 }
 
-export interface CoverImage {
+interface CoverImage {
     large: string;
 }
 
-export interface Title {
+interface Title {
     userPreferred: string;
 }

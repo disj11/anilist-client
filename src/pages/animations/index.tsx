@@ -1,63 +1,73 @@
-import React, {useCallback, useState} from "react";
-import {withRouter} from "next/router";
-import {WithRouterProps} from "next/dist/client/with-router";
+import React from "react";
 import {useQuery} from "@apollo/react-hooks";
-import {PAGE} from "../../constants/queries";
-import {Box, Container} from "@material-ui/core";
+import {TREND} from "../../constants/queries";
+import {Box, Container, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import Layout from "../../templates/layout/Layout";
-import {Pagination} from "@material-ui/lab";
 import {SimpleAnimations} from "../../templates/animations";
-import {Data} from "../../models";
+import {DateUtils} from "../../utils/DateUtils";
+import {TrendData} from "../../models";
+import grey from '@material-ui/core/colors/grey';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
     },
+    heading: {
+        marginBottom: theme.spacing(),
+        color: grey[800],
+    },
 }));
 
-const Animations = ({router}: WithRouterProps) => {
+const Animations = () => {
     const classes = useStyles();
-    const [{page, perPage}, setPageInfo] = useState({
-        page: Number(router.query.page) || 1,
-        perPage: Number(router.query.perPage) || 30,
-    });
 
-    const {loading, error, data} = useQuery<Data>(PAGE, {
+    const {loading, error, data} = useQuery<TrendData>(TREND, {
         variables: {
-            page: page,
-            perPage: perPage,
+            season: DateUtils.getSeason(),
+            seasonYear: DateUtils.getSeasonYear(),
+            nextSeason: DateUtils.getNextSeason(),
+            nextYear: DateUtils.getNextSeasonYear(),
         },
     });
 
-    const handleChangePage = useCallback((event: object, page: number) => {
-        setPageInfo({
-            page: page,
-            perPage: perPage,
-        })
-    }, []);
-
-    const media = data?.Page?.media || [];
-    const pageInfo = data?.Page?.pageInfo || {total: 0, currentPage: 1};
+    const trending = data?.trending?.media || [];
+    const season = data?.season?.media || [];
+    const nextSeason = data?.nextSeason?.media || [];
+    const popular = data?.popular?.media || [];
+    const top = data?.top?.media || [];
 
     return (
         <Layout loading={loading}>
             <Container className={classes.container} maxWidth={"lg"}>
-                <SimpleAnimations media={media}/>
-                <Box component={"div"} mt={2}>
-                    <Pagination
-                        page={pageInfo.currentPage}
-                        count={Math.ceil(pageInfo.total / perPage)}
-                        onChange={handleChangePage}
-                        color="primary"
-                        variant="outlined"
-                        shape="rounded"
-                    />
+                <Box mb={3}>
+                    {!loading && <Typography className={classes.heading} variant="h6">
+                        TRENDING NOW
+                    </Typography>}
+                    <SimpleAnimations media={trending}/>
+                </Box>
+                <Box mb={3}>
+                    {!loading && <Typography className={classes.heading} variant="h6">
+                        POPULAR THIS SEASON
+                    </Typography>}
+                    <SimpleAnimations media={season}/>
+                </Box>
+                <Box mb={3}>
+                    {!loading && <Typography className={classes.heading} variant="h6">
+                        UPCOMING NEXT SEASON
+                    </Typography>}
+                    <SimpleAnimations media={nextSeason}/>
+                </Box>
+                <Box mb={3}>
+                    {!loading && <Typography className={classes.heading} variant="h6">
+                        ALL TIME POPULAR
+                    </Typography>}
+                    <SimpleAnimations media={popular}/>
                 </Box>
             </Container>
         </Layout>
     )
 }
 
-export default withRouter(Animations);
+export default Animations;

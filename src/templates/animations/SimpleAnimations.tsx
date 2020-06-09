@@ -1,8 +1,8 @@
 import React, {FunctionComponent} from "react";
-import {Card, Grid} from "@material-ui/core";
+import {Card, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {Image} from "../../components/atoms/Image";
-import {Media} from "../../models/Data";
+import {Media} from "../../models";
 
 interface Props {
     media: Array<Media>;
@@ -11,6 +11,9 @@ interface Props {
 const useStyles = makeStyles((theme) => ({
     cardMedia: {
         height: 265,
+    },
+    title: {
+        padding: theme.spacing(),
     },
 }));
 
@@ -27,6 +30,12 @@ const SimpleAnimations: FunctionComponent<Props> = ({media}) => {
                                 image={data.coverImage.large}
                                 title={data.title.userPreferred}
                             />
+                            <Typography
+                                className={classes.title}
+                                variant={"caption"}
+                                component={"div"}
+                                noWrap
+                            >{data.title.userPreferred}</Typography>
                         </Card>
                     </Grid>
                 )
