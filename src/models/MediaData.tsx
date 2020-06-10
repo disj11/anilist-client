@@ -24,11 +24,12 @@ interface PageInfo {
 }
 
 export interface Media {
-    averageScore: number;
+    averageScore?: number;
     coverImage: CoverImage;
     genres: Array<string>;
     id: number;
     title: Title;
+    description?: string;
 }
 
 interface CoverImage {

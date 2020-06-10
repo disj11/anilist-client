@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useState} from "react";
-import {CircularProgress} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {Skeleton} from "@material-ui/lab";
 
 interface Props {
     className: string;
@@ -31,7 +31,7 @@ const Image: FunctionComponent<Props> = ({className, image, title}) => {
     return (
         <>
             {loading && <div className={[className, styles.progress].join(' ')}>
-                <CircularProgress color={"secondary"}/>
+                <Skeleton variant="rect" width={"100%"} height={"100%"} />
             </div>}
             <div
                 className={className}

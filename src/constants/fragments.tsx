@@ -11,5 +11,6 @@ export const FRAGMENT_MEDIA = gql`
       coverImage {
         large
       }
+      description
     }
 `

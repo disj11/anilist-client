@@ -1,33 +1,20 @@
 import {Season} from "../models";
 
 export class DateUtils {
-    /**
-     * WINTER
-     * Months December to February
-     *
-     * SPRING
-     * Months March to May
-     *
-     * SUMMER
-     * Months June to August
-     *
-     * FALL
-     * Months September to November
-     */
     public static getSeason(): Season {
         const month = new Date().getMonth() + 1;
         switch (month) {
-            case 12:
             case 1:
             case 2:
+            case 3:
                 return Season.WINTER;
-            case 9:
             case 10:
             case 11:
+            case 12:
                 return Season.FALL;
-            case 6:
             case 7:
             case 8:
+            case 9:
                 return Season.SUMMER;
             default:
                 return Season.SPRING
