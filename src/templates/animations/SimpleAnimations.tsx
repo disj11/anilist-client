@@ -5,11 +5,9 @@ import {Image} from "../../components/atoms/Image";
 import {Media} from "../../models";
 import {MediaTooltip} from "../../components/atoms/tooltip";
 import {withStyles} from "@material-ui/styles";
-import {skyblue} from "color-name";
-import {blueGrey} from "@material-ui/core/colors";
 
 interface Props {
-    media: Array<Media>;
+    list: Array<Media>;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -28,35 +26,38 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
     },
 }))(Tooltip);
 
-const SimpleAnimations: FunctionComponent<Props> = ({media}) => {
+const SimpleAnimations: FunctionComponent<Props> = ({list}) => {
     const classes = useStyles();
     return (
-        <Grid container spacing={4}>
-            {media.map((data) => {
-                return (
-                    <Grid item key={data.id} xs={6} sm={3} md={2}>
-                        <HtmlTooltip
-                            title={<MediaTooltip media={data}/>}
-                            placement={"right-start"}
-                        >
-                            <Card>
-                                <Image
-                                    className={classes.cardMedia}
-                                    image={data.coverImage.large}
-                                    title={data.title.userPreferred}
-                                />
-                                <Typography
-                                    className={classes.title}
-                                    variant={"caption"}
-                                    component={"div"}
-                                    noWrap
-                                >{data.title.userPreferred}</Typography>
-                            </Card>
-                        </HtmlTooltip>
-                    </Grid>
-                )
-            })}
-        </Grid>
+        <>
+            {list.length > 0 && <Grid container spacing={4}>
+                {list.map((data) => {
+                    return (
+                        <Grid item key={data.id} xs={6} sm={3} md={2}>
+                            <HtmlTooltip
+                                title={<MediaTooltip media={data}/>}
+                                placement={"right-start"}
+                            >
+                                <Card>
+                                    <Image
+                                        className={classes.cardMedia}
+                                        image={data.coverImage.large}
+                                        title={data.title.userPreferred}
+                                    />
+                                    <Typography
+                                        className={classes.title}
+                                        variant={"caption"}
+                                        component={"div"}
+                                        noWrap
+                                    >{data.title.userPreferred}</Typography>
+                                </Card>
+                            </HtmlTooltip>
+                        </Grid>
+                    )
+                })}
+            </Grid>}
+            {list.length === 0 && <Typography>No results found :(</Typography>}
+        </>
     )
 }
 

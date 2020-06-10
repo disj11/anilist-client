@@ -3,7 +3,7 @@ import {useQuery} from "@apollo/react-hooks";
 import {TREND} from "../constants/queries";
 import {Box, Container, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import Layout from "../templates/layout/Layout";
+import {Layout} from "../templates/layout";
 import {SimpleAnimations} from "../templates/animations";
 import {DateUtils} from "../utils/DateUtils";
 import {TrendData} from "../models";
@@ -45,25 +45,25 @@ const Animations = () => {
                     {!loading && <Typography className={classes.heading} variant="h6">
                         TRENDING NOW
                     </Typography>}
-                    <SimpleAnimations media={trending}/>
+                    {!loading && <SimpleAnimations list={trending}/>}
                 </Box>
                 <Box mb={3}>
                     {!loading && <Typography className={classes.heading} variant="h6">
                         POPULAR THIS SEASON
                     </Typography>}
-                    <SimpleAnimations media={season}/>
+                    {!loading && <SimpleAnimations list={season}/>}
                 </Box>
                 <Box mb={3}>
                     {!loading && <Typography className={classes.heading} variant="h6">
                         UPCOMING NEXT SEASON
                     </Typography>}
-                    <SimpleAnimations media={nextSeason}/>
+                    {!loading && <SimpleAnimations list={nextSeason}/>}
                 </Box>
                 <Box mb={3}>
                     {!loading && <Typography className={classes.heading} variant="h6">
                         ALL TIME POPULAR
                     </Typography>}
-                    <SimpleAnimations media={popular}/>
+                    {!loading && <SimpleAnimations list={popular}/>}
                 </Box>
             </Container>
         </Layout>

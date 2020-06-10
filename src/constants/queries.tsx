@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import {FRAGMENT_MEDIA} from "./fragments";
 
 export const PAGE = gql`
-query($page: Int = 1, $perPage: Int = 30) {
+query($page: Int, $perPage: Int, $search: String) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       total
@@ -11,7 +11,7 @@ query($page: Int = 1, $perPage: Int = 30) {
       lastPage
       hasNextPage
     }
-    media {
+    media(search: $search) {
       ...media
     }
   }
