@@ -33,6 +33,7 @@ export interface Media {
     bannerImage?: string;
     status: string;
     episodes: number;
+    format: string;
 }
 
 interface CoverImage {

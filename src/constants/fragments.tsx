@@ -15,5 +15,6 @@ export const FRAGMENT_MEDIA = gql`
       description
       status
       episodes
+      format
     }
 `
