@@ -33,6 +33,7 @@ export interface Media {
 }
 
 interface CoverImage {
+    extraLarge?: string;
     large: string;
 }
 

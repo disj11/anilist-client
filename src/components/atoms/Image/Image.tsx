@@ -3,21 +3,17 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Skeleton} from "@material-ui/lab";
 
 interface Props {
-    className: string;
-    image: string;
-    title: string;
+    className?: string;
+    image?: string;
+    title?: string;
 }
 
 const useStyles = makeStyles((theme) => ({
-    progress: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    },
     image: {
         width: "100%",
         height: "100%",
         objectFit: "cover",
+        opacity: 0.8
     },
 }));
 
@@ -30,8 +26,8 @@ const Image: FunctionComponent<Props> = ({className, image, title}) => {
 
     return (
         <>
-            {loading && <div className={[className, styles.progress].join(' ')}>
-                <Skeleton variant="rect" width={"100%"} height={"100%"} />
+            {loading && <div className={[className].join(' ')}>
+                <Skeleton variant="rect" animation={"wave"} width={"100%"} height={"100%"} />
             </div>}
             <div
                 className={className}

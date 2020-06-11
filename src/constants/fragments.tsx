@@ -9,6 +9,7 @@ export const FRAGMENT_MEDIA = gql`
       genres
       averageScore
       coverImage {
+        extraLarge
         large
       }
       description
