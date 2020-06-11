@@ -23,6 +23,7 @@ const MediaTooltip: FunctionComponent<Props> = ({media}) => {
     const classes = useStyles();
     return (
         <Box>
+            <Typography gutterBottom color={"textPrimary"}>{media.format} {media.episodes && ' | episodes ' + media.episodes}</Typography>
             {media.averageScore && <Rating name="read-only" value={media.averageScore / 20} readOnly />}
             {media.description && <Typography
                 className={classes.description}

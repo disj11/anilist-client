@@ -1,10 +1,10 @@
 import {AppBar, IconButton, InputBase, LinearProgress, Toolbar, Typography} from "@material-ui/core";
 import React, {FunctionComponent, useCallback, useState} from "react";
 import SearchIcon from '@material-ui/icons/Search';
-import MenuIcon from '@material-ui/icons/Menu';
-import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
-import {useRouter}  from 'next/router';
+import {createStyles, fade, makeStyles, Theme} from '@material-ui/core/styles';
+import {useRouter} from 'next/router';
 import {PagePaths} from "../../../constants/PagePaths";
+import {HomeIcon} from "../../atoms/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -69,7 +69,10 @@ const SiteAppBar: FunctionComponent<{loading?: boolean}> = ({loading, children})
         if (e.key.toUpperCase() === 'ENTER') {
             await router.push({
                 pathname: PagePaths.ANIMATIONS,
-                query: { search: search },
+                query: {
+                    search: search,
+                    page: 1,
+                },
             });
         }
     }, [search]);
@@ -77,6 +80,10 @@ const SiteAppBar: FunctionComponent<{loading?: boolean}> = ({loading, children})
     const handleSearchChange = useCallback(e => {
         setSearch(e.target.value);
     }, [])
+
+    const handleHomeClick = useCallback(async () => {
+        await router.push(PagePaths.HOME);
+    }, []);
 
     return (
         <AppBar position="sticky">
@@ -86,8 +93,9 @@ const SiteAppBar: FunctionComponent<{loading?: boolean}> = ({loading, children})
                     className={classes.menuButton}
                     color="inherit"
                     aria-label="open drawer"
+                    onClick={handleHomeClick}
                 >
-                    <MenuIcon />
+                    <HomeIcon />
                 </IconButton>
                 <Typography className={classes.title} variant="h6" noWrap>
                     Anime

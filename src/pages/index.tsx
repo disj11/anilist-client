@@ -41,25 +41,25 @@ const Animations = () => {
     return (
         <Layout loading={loading}>
             <Container className={classes.container} maxWidth={"lg"}>
-                <Box mb={3}>
+                <Box mb={5}>
                     {!loading && <Typography className={classes.heading} variant="h6">
                         TRENDING NOW
                     </Typography>}
                     {!loading && <SimpleAnimations list={trending}/>}
                 </Box>
-                <Box mb={3}>
+                <Box mb={5}>
                     {!loading && <Typography className={classes.heading} variant="h6">
                         POPULAR THIS SEASON
                     </Typography>}
                     {!loading && <SimpleAnimations list={season}/>}
                 </Box>
-                <Box mb={3}>
+                <Box mb={5}>
                     {!loading && <Typography className={classes.heading} variant="h6">
                         UPCOMING NEXT SEASON
                     </Typography>}
                     {!loading && <SimpleAnimations list={nextSeason}/>}
                 </Box>
-                <Box mb={3}>
+                <Box mb={5}>
                     {!loading && <Typography className={classes.heading} variant="h6">
                         ALL TIME POPULAR
                     </Typography>}
