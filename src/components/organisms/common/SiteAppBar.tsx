@@ -68,7 +68,7 @@ const SiteAppBar: FunctionComponent<{loading?: boolean}> = ({loading, children})
     const handleKeyPress = useCallback(async e => {
         if (e.key.toUpperCase() === 'ENTER') {
             await router.push({
-                pathname: PagePaths.SEARCH,
+                pathname: PagePaths.ANIMATIONS,
                 query: { search: search },
             });
         }

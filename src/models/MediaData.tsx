@@ -30,10 +30,12 @@ export interface Media {
     id: number;
     title: Title;
     description?: string;
+    bannerImage?: string;
+    status: string;
+    episodes: number;
 }
 
 interface CoverImage {
-    extraLarge?: string;
     large: string;
 }
 

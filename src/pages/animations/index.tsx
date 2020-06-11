@@ -79,7 +79,7 @@ const Search = ({router}: WithRouterProps) => {
                         &nbsp;({pageInfo.total})
                     </Typography>
                 </Box>}
-                <SimpleAnimations list={list}/>
+                {!loading && <SimpleAnimations list={list}/>}
                 {list.length > 0 && <Box component={"div"} mt={2}>
                     <Pagination
                         page={pageInfo.currentPage}

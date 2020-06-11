@@ -1,3 +1,3 @@
 export enum PagePaths {
-    SEARCH = '/animations'
+    ANIMATIONS = '/animations',
 }
