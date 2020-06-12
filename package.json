@@ -2,13 +2,11 @@
   "name": "anilist-client",
   "version": "1.0.0",
   "main": "index.js",
-  "homepage": "https://disj11.github.io/anilist-client/",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start"
   },
-  "repository": "https://github.com/disj11/anilist-client.git",
   "license": "MIT",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
