@@ -22,15 +22,27 @@ const useStyles = makeStyles(theme => ({
     banner: {
         height: 340,
     },
-    box: {
+    container: {
         backgroundColor: "white",
         position: "relative",
         top: -150,
         padding: 0,
     },
+    main: {
+        display: "flex",
+        [theme.breakpoints.down("xs")]: {
+            flexDirection: "column",
+        },
+    },
     title: {
       marginTop: theme.spacing(),
       marginBottom: theme.spacing(3),
+    },
+    imageBox: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: blueGrey[800],
     },
     image: {
         width: 240,
@@ -59,9 +71,9 @@ const AnimationDetail: FunctionComponent<Props> = ({id}) => {
                     title={media?.title.userPreferred}
                 />}
             </Paper>
-            {media && <Container className={classes.box} maxWidth={"lg"}>
-                <Box display={"flex"}>
-                    <Box>
+            {media && <Container className={classes.container} maxWidth={"lg"}>
+                <Box className={classes.main}>
+                    <Box className={classes.imageBox}>
                         <Image
                             className={classes.image}
                             image={media?.coverImage.large}
