@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const SiteAppBar: FunctionComponent<{loading?: boolean}> = ({loading, children}) => {
+const SiteAppBar: FunctionComponent<{loading?: boolean}> = ({loading}) => {
     const router = useRouter();
     const classes = useStyles();
     const [search, setSearch] = useState('');
