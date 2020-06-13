@@ -3,19 +3,17 @@ import {withRouter} from "next/router";
 import {WithRouterProps} from "next/dist/client/with-router";
 import {useQuery} from "@apollo/react-hooks";
 import {PAGE} from "../../constants/queries";
-import {Box, Container, Typography} from "@material-ui/core";
-import {makeStyles} from '@material-ui/core/styles';
+import {Box, Typography} from "@material-ui/core";
 import {Layout} from "../../templates/layout";
-import {Pagination} from "@material-ui/lab";
-import {SimpleAnimations} from "../../templates/animations";
+import {Pagination, ToggleButton, ToggleButtonGroup} from "@material-ui/lab";
+import {AppearAnimations, DetailAnimations, SimpleAnimations} from "../../templates/animations";
 import {Media, MediaData} from "../../models";
-
-const useStyles = makeStyles((theme) => ({
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-    },
-}));
+import ViewListIcon from '@material-ui/icons/ViewList';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
+import {AppearTransition} from "../../components/atoms/transition";
+import MainLayout from "../../templates/layout/MainLayout";
+import {ViewMode} from "../../constants/ViewMode";
+import {ViewModeSelect} from "../../components/molecules/select";
 
 interface QueryResponse {
     list: Array<Media>,
@@ -28,8 +26,12 @@ interface PageInfo {
 }
 
 const Search = ({router}: WithRouterProps) => {
-    const classes = useStyles();
     const {search} = router.query;
+
+    const [viewMode, setViewMode] = React.useState(ViewMode.DETAIL);
+    const handleViewChange = useCallback((viewMode: ViewMode) => {
+        setViewMode(viewMode);
+    }, []);
 
     const [{page, perPage}, setPageInfo] = useState({
         page: Number(router.query.page) || 1,
@@ -42,7 +44,7 @@ const Search = ({router}: WithRouterProps) => {
             total: 0,
             currentPage: 1,
         }
-    })
+    });
 
     const queryOptions: any = {
         page: page,
@@ -71,15 +73,24 @@ const Search = ({router}: WithRouterProps) => {
 
     return (
         <Layout loading={loading}>
-            <Container className={classes.container} maxWidth={"lg"}>
-                {search && <Box mb={3}>
-                    <Typography variant={"h5"} component={"div"}>
-                        Search Results for <Typography variant={"h5"} component={"span"}
-                                                       color={"primary"}>'{search}'</Typography>
-                        &nbsp;({pageInfo.total})
+            <MainLayout>
+                {!loading && search && <Box mb={1}>
+                    <Typography variant={"h6"} component={"span"}>
+                        Search Results for&nbsp;
+                    </Typography>
+                    <Typography variant={"h6"} component={"span"}
+                                color={"secondary"}>
+                        '{search}'
+                    </Typography>
+                    <Typography variant={"body1"}>
+                        Total of {pageInfo.total}
                     </Typography>
                 </Box>}
-                <SimpleAnimations list={list}/>
+                {list.length > 0 && <Box display={"flex"} justifyContent={"flex-end"} mb={1}>
+                    <ViewModeSelect selected={viewMode} onChange={handleViewChange}/>
+                </Box>}
+                {!loading && list.length === 0 && <Typography>No results found :(</Typography>}
+                <AppearAnimations list={list} viewMode={viewMode}/>
                 {list.length > 0 && <Box component={"div"} mt={2}>
                     <Pagination
                         page={pageInfo.currentPage}
@@ -90,7 +101,7 @@ const Search = ({router}: WithRouterProps) => {
                         shape="rounded"
                     />
                 </Box>}
-            </Container>
+            </MainLayout>
         </Layout>
     )
 }

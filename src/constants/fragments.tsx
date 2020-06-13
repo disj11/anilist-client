@@ -12,7 +12,7 @@ export const FRAGMENT_MEDIA = gql`
         large
       }
       bannerImage
-      description
+      description(asHtml: false)
       status
       episodes
       format

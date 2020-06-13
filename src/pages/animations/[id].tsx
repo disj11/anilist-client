@@ -82,7 +82,7 @@ const AnimationDetail: FunctionComponent<Props> = ({id}) => {
                     </Box>
                     <Box p={3} display={"flex"} flexDirection={"column"}>
                         <Box flex={1}>
-                            <Typography variant={"h6"}>{media?.format} | episodes {media?.episodes} | {media?.status}</Typography>
+                            <Typography variant={"subtitle2"}>{media?.format} | episodes {media?.episodes} | {media?.status}</Typography>
                             <Typography className={classes.title} variant={"h4"}>{media?.title.userPreferred}</Typography>
                             <Rating name="read-only" size="large"
                                     value={media?.averageScore ? media?.averageScore / 20 : 0} readOnly/>

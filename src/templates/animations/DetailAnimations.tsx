@@ -1,20 +1,20 @@
 import React, {FunctionComponent} from "react";
 import {Grid} from "@material-ui/core";
 import {Media} from "../../models";
-import {SimpleAnimationCard} from "../../components/organisms/card";
+import {DetailAnimationCard} from "../../components/organisms/card";
 
 interface Props {
     list: Array<Media>;
 }
 
-const SimpleAnimations: FunctionComponent<Props> = ({list}) => {
+const DetailAnimations: FunctionComponent<Props> = ({list}) => {
     return (
         <>
             {list.length > 0 && <Grid container spacing={4}>
                 {list.map((media) => {
                     return (
-                        <Grid item key={media.id} xs={6} sm={3} md={2}>
-                            <SimpleAnimationCard media={media}/>
+                        <Grid item key={media.id} sm={12} md={6}>
+                            <DetailAnimationCard media={media}/>
                         </Grid>
                     )
                 })}
@@ -23,4 +23,4 @@ const SimpleAnimations: FunctionComponent<Props> = ({list}) => {
     )
 }
 
-export default SimpleAnimations;
+export default DetailAnimations;

@@ -6,6 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 interface Props {
     media: Media;
+    maxDescriptionLength?: number,
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MediaTooltip: FunctionComponent<Props> = ({media}) => {
+const MediaTooltip: FunctionComponent<Props> = ({media, maxDescriptionLength}) => {
     const classes = useStyles();
     return (
         <Box>
@@ -29,9 +30,8 @@ const MediaTooltip: FunctionComponent<Props> = ({media}) => {
                 className={classes.description}
                 color={"textPrimary"}
                 variant={"body2"}
-                dangerouslySetInnerHTML={{__html: media.description.substring(0, 100) + "..."}}
-            />}
-            {media.genres.map(genre => {
+            >{maxDescriptionLength ? media.description.substring(0, maxDescriptionLength) + "..." : media.description}</Typography>}
+            {media.genres.slice(0, 3).map(genre => {
                 return <Chip
                     className={classes.tag}
                     key={genre}

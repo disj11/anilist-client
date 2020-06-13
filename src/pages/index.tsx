@@ -1,27 +1,21 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {useQuery} from "@apollo/react-hooks";
 import {TREND} from "../constants/queries";
-import {Box, Container, Typography} from "@material-ui/core";
-import {makeStyles} from '@material-ui/core/styles';
 import {Layout} from "../templates/layout";
-import {SimpleAnimations} from "../templates/animations";
 import {DateUtils} from "../utils/DateUtils";
 import {TrendData} from "../models";
-import grey from '@material-ui/core/colors/grey';
+import MainLayout from "../templates/layout/MainLayout";
+import {AppearTrendAnimations} from "../templates/animations";
+import {ViewModeSelect} from "../components/molecules/select";
+import {Box} from "@material-ui/core";
+import {ViewMode} from "../constants/ViewMode";
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-    },
-    heading: {
-        marginBottom: theme.spacing(),
-        color: grey[800],
-    },
-}));
-
-const Animations = () => {
-    const classes = useStyles();
+const Trend = () => {
+    const [viewMode, setViewMode] = React.useState(ViewMode.DETAIL);
+    const handleViewChange = useCallback((viewMode: ViewMode) => {
+        console.log(viewMode);
+        setViewMode(viewMode);
+    }, []);
 
     const {loading, error, data} = useQuery<TrendData>(TREND, {
         variables: {
@@ -32,42 +26,18 @@ const Animations = () => {
         },
     });
 
-    const trending = data?.trending?.media || [];
-    const season = data?.season?.media || [];
-    const nextSeason = data?.nextSeason?.media || [];
-    const popular = data?.popular?.media || [];
-    const top = data?.top?.media || [];
-
     return (
         <Layout loading={loading}>
-            <Container className={classes.container} maxWidth={"lg"}>
-                <Box mb={5}>
-                    {!loading && <Typography className={classes.heading} variant="h6">
-                        TRENDING NOW
-                    </Typography>}
-                    {!loading && <SimpleAnimations list={trending}/>}
-                </Box>
-                <Box mb={5}>
-                    {!loading && <Typography className={classes.heading} variant="h6">
-                        POPULAR THIS SEASON
-                    </Typography>}
-                    {!loading && <SimpleAnimations list={season}/>}
-                </Box>
-                <Box mb={5}>
-                    {!loading && <Typography className={classes.heading} variant="h6">
-                        UPCOMING NEXT SEASON
-                    </Typography>}
-                    {!loading && <SimpleAnimations list={nextSeason}/>}
-                </Box>
-                <Box mb={5}>
-                    {!loading && <Typography className={classes.heading} variant="h6">
-                        ALL TIME POPULAR
-                    </Typography>}
-                    {!loading && <SimpleAnimations list={popular}/>}
-                </Box>
-            </Container>
+            <MainLayout>
+                {data && <React.Fragment>
+                    <Box display={"flex"} justifyContent={"flex-end"} mb={1}>
+                        <ViewModeSelect selected={viewMode} onChange={handleViewChange}/>
+                    </Box>
+                    <AppearTrendAnimations data={data} viewMode={viewMode}/>
+                </React.Fragment>}
+            </MainLayout>
         </Layout>
     )
 }
 
-export default Animations;
+export default Trend;
