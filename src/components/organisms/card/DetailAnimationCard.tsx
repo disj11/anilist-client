@@ -10,10 +10,17 @@ import {Media} from "../../../models";
 const useStyles = makeStyles((theme) => ({
     mediaBox: {
         display: "flex",
+        [theme.breakpoints.down("xs")]: {
+            width: "93vw",
+        }
     },
     cardMedia: {
         width: 180,
-        height: 240,
+        height: "100%",
+        objectFit: "cover",
+        [theme.breakpoints.down("xs")]: {
+            width: 140,
+        }
     },
     title: {
         marginBottom: theme.spacing(),
