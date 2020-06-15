@@ -1,46 +1,19 @@
-import React, {FunctionComponent, useState} from "react";
-import {makeStyles} from "@material-ui/core/styles";
-import {Skeleton} from "@material-ui/lab";
+import React, {FunctionComponent} from "react";
+import {default as MaterialImage} from "material-ui-image";
 
 interface Props {
-    className?: string;
-    image?: string;
-    title?: string;
+    src: string;
+    aspectRatio?: number;
+    imageStyle?: object;
 }
 
-const useStyles = makeStyles((theme) => ({
-    image: {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        display: "block",
-    },
-}));
-
-const Image: FunctionComponent<Props> = ({className, image, title}) => {
-    const styles = useStyles();
-    const [loading, setLoading] = useState(true);
-    const handleImageLoad = () => {
-        setLoading(false);
-    }
-
+const Image: FunctionComponent<Props> = ({src, aspectRatio, imageStyle}) => {
     return (
-        <>
-            {loading && <div className={[className].join(' ')}>
-                <Skeleton variant="rect" animation={"wave"} width={"100%"} height={"100%"} />
-            </div>}
-            <div
-                className={className}
-                style={{display: loading ? "none" : "block"}}
-            >
-                <img
-                    className={styles.image}
-                    src={image}
-                    alt={title}
-                    onLoad={handleImageLoad}
-                />
-            </div>
-        </>
+        <MaterialImage
+            src={src}
+            aspectRatio={aspectRatio || 1}
+            imageStyle={imageStyle}
+        />
     )
 }
 

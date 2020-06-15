@@ -6,7 +6,7 @@ import DetailTrendAnimations from "./DetailTrendAnimations";
 import {ViewMode} from "../../constants/ViewMode";
 
 interface Props {
-    data: TrendData;
+    data: TrendData | undefined;
     viewMode: ViewMode;
 }
 

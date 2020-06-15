@@ -15,7 +15,7 @@ const Trend = () => {
         setViewMode(viewMode);
     }, []);
 
-    const {loading, error, data} = useQuery<TrendData>(TREND, {
+    const {loading, data} = useQuery<TrendData>(TREND, {
         variables: {
             season: DateUtils.getSeason(),
             seasonYear: DateUtils.getSeasonYear(),
@@ -26,12 +26,12 @@ const Trend = () => {
 
     return (
         <Layout loading={loading} maxWidth={"lg"}>
-            {data && <React.Fragment>
+            <Box p={3}>
                 <Box display={"flex"} justifyContent={"flex-end"} mb={1}>
                     <ViewModeSelect selected={viewMode} onChange={handleViewChange}/>
                 </Box>
                 <AppearTrendAnimations data={data} viewMode={viewMode}/>
-            </React.Fragment>}
+            </Box>
         </Layout>
     )
 }

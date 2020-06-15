@@ -1,13 +1,11 @@
 import React, {FunctionComponent} from "react";
-import NoSSR from "./NoSSR";
 import {SiteAppBar} from "../../components/organisms/common";
-import {Container} from "@material-ui/core";
+import {Box, CircularProgress, Container} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
+        padding: 0,
     },
 }));
 
@@ -19,12 +17,19 @@ interface Props {
 const Layout: FunctionComponent<Props> = ({loading, maxWidth, children}) => {
     const classes = useStyles();
     return (
-        <NoSSR>
-            <SiteAppBar loading={loading}/>
+        <React.Fragment>
+            <SiteAppBar/>
             <Container className={classes.container} maxWidth={maxWidth}>
-                {children}
+                {loading ? <Box
+                    p={3}
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                >
+                    <CircularProgress />
+                </Box> : children}
             </Container>
-        </NoSSR>
+        </React.Fragment>
     )
 }
 

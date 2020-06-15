@@ -1,39 +1,31 @@
-import {Box, Card, CardActionArea, Typography} from "@material-ui/core";
-import {Image} from "../../atoms/Image";
-import {MediaTooltip} from "../tooltip";
+import {Box, Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 import React, {FunctionComponent, useCallback} from "react";
 import {useRouter} from "next/router";
 import {PagePaths} from "../../../constants/PagePaths";
-import {makeStyles} from "@material-ui/core/styles";
 import {Media} from "../../../models";
-
-const useStyles = makeStyles((theme) => ({
-    mediaBox: {
-        display: "flex",
-        [theme.breakpoints.down("xs")]: {
-            width: "93vw",
-        }
-    },
-    cardMedia: {
-        width: 180,
-        height: "100%",
-        objectFit: "cover",
-        [theme.breakpoints.down("xs")]: {
-            width: 140,
-        }
-    },
-    title: {
-        marginBottom: theme.spacing(),
-    },
-}));
+import {MediaTooltip} from "../tooltip";
+import {makeStyles} from "@material-ui/core/styles";
 
 interface Props {
     media: Media;
 }
 
+const useStyles = makeStyles({
+    root: {
+      height: 227,
+    },
+    cardMedia: {
+        width: 180,
+        height: "100%",
+    },
+    title: {
+        width: 250,
+    },
+});
+
 const DetailAnimationCard: FunctionComponent<Props> = ({media}) => {
-    const classes = useStyles();
     const router = useRouter();
+    const classes = useStyles();
 
     const handleClick = useCallback(async (id: number) => {
         await router.push(PagePaths.ANIMATIONS + "/" + id);
@@ -42,23 +34,26 @@ const DetailAnimationCard: FunctionComponent<Props> = ({media}) => {
     return (
         <CardActionArea onClick={() => handleClick(media.id)}>
             <Card>
-                <Box className={classes.mediaBox}>
+                <Box display={"flex"} className={classes.root}>
                     <Box>
-                        <Image
+                        <CardMedia
                             className={classes.cardMedia}
                             image={media.coverImage.large}
-                            title={media.title.userPreferred}
+                            src={"image"}
                         />
                     </Box>
-                    <Box p={3}>
+                    <CardContent>
                         <Typography
                             className={classes.title}
                             variant={"h6"}
                             component={"div"}
+                            gutterBottom
                             noWrap
-                        >{media.title.userPreferred}</Typography>
+                        >
+                            {media.title.userPreferred}
+                        </Typography>
                         <MediaTooltip media={media} maxDescriptionLength={100}/>
-                    </Box>
+                    </CardContent>
                 </Box>
             </Card>
         </CardActionArea>

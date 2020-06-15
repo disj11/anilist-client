@@ -60,7 +60,7 @@ const Search = ({router}: WithRouterProps) => {
         }
     });
 
-    const handleChangePage = useCallback((event: object, page: number) => {
+    const handleChangePage = useCallback((_event: object, page: number) => {
         setPageInfo({
             page: page,
             perPage: perPage,
@@ -69,33 +69,35 @@ const Search = ({router}: WithRouterProps) => {
 
     return (
         <Layout loading={loading} maxWidth={"lg"}>
-            {!loading && search && <Box mb={1}>
-                <Typography variant={"h6"} component={"span"}>
-                    Search Results for&nbsp;
-                </Typography>
-                <Typography variant={"h6"} component={"span"}
-                            color={"secondary"}>
-                    '{search}'
-                </Typography>
-                <Typography variant={"body1"}>
-                    Total of {pageInfo.total}
-                </Typography>
-            </Box>}
-            {list.length > 0 && <Box display={"flex"} justifyContent={"flex-end"} mb={1}>
-                <ViewModeSelect selected={viewMode} onChange={handleViewChange}/>
-            </Box>}
-            {!loading && list.length === 0 && <Typography>No results found :(</Typography>}
-            <AppearAnimations list={list} viewMode={viewMode}/>
-            {list.length > 0 && <Box component={"div"} mt={2}>
-                <Pagination
-                    page={pageInfo.currentPage}
-                    count={Math.ceil(pageInfo.total / perPage)}
-                    onChange={handleChangePage}
-                    color="primary"
-                    variant="outlined"
-                    shape="rounded"
-                />
-            </Box>}
+            <Box p={3}>
+                {!loading && search && <Box mb={1}>
+                    <Typography variant={"h6"} component={"span"}>
+                        Search Results for&nbsp;
+                    </Typography>
+                    <Typography variant={"h6"} component={"span"}
+                                color={"secondary"}>
+                        '{search}'
+                    </Typography>
+                    <Typography variant={"body1"}>
+                        Total of {pageInfo.total}
+                    </Typography>
+                </Box>}
+                {list.length > 0 && <Box display={"flex"} justifyContent={"flex-end"} mb={1}>
+                    <ViewModeSelect selected={viewMode} onChange={handleViewChange}/>
+                </Box>}
+                {!loading && list.length === 0 && <Typography>No results found :(</Typography>}
+                <AppearAnimations list={list} viewMode={viewMode}/>
+                {list.length > 0 && <Box component={"div"} mt={2}>
+                    <Pagination
+                        page={pageInfo.currentPage}
+                        count={Math.ceil(pageInfo.total / perPage)}
+                        onChange={handleChangePage}
+                        color="primary"
+                        variant="outlined"
+                        shape="rounded"
+                    />
+                </Box>}
+            </Box>
         </Layout>
     )
 }

@@ -41,7 +41,7 @@ const GenreSelect: FunctionComponent<Props> = ({onChange}) => {
         }
     });
 
-    const handleChange = useCallback((event, options) => {
+    const handleChange = useCallback((_event, options) => {
         if (onChange) {
             onChange(options);
         }

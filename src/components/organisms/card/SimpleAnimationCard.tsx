@@ -44,9 +44,8 @@ const SimpleAnimationCard: FunctionComponent<Props> = ({media}) => {
             <CardActionArea onClick={() => handleClick(media.id)}>
                 <Card>
                     <Image
-                        className={classes.cardMedia}
-                        image={media.coverImage.large}
-                        title={media.title.userPreferred}
+                        src={media.coverImage.large}
+                        aspectRatio={2/3}
                     />
                     <Typography
                         className={classes.title}

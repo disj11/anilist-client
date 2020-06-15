@@ -1,5 +1,5 @@
-import {AppBar, IconButton, InputBase, LinearProgress, Toolbar, Typography} from "@material-ui/core";
-import React, {FunctionComponent, useCallback, useState} from "react";
+import {AppBar, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
+import React, {useCallback, useState} from "react";
 import SearchIcon from '@material-ui/icons/Search';
 import {createStyles, fade, makeStyles, Theme} from '@material-ui/core/styles';
 import {useRouter} from 'next/router';
@@ -8,6 +8,9 @@ import {HomeIcon} from "../../atoms/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+        root: {
+            position: "relative",
+        },
         menuButton: {
             marginRight: theme.spacing(2),
         },
@@ -60,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const SiteAppBar: FunctionComponent<{loading?: boolean}> = ({loading}) => {
+const SiteAppBar = () => {
     const router = useRouter();
     const classes = useStyles();
     const [search, setSearch] = useState('');
@@ -86,38 +89,39 @@ const SiteAppBar: FunctionComponent<{loading?: boolean}> = ({loading}) => {
     }, []);
 
     return (
-        <AppBar position="sticky">
-            <Toolbar>
-                <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleHomeClick}
-                >
-                    <HomeIcon />
-                </IconButton>
-                <Typography className={classes.title} variant="h6" noWrap>
-                    Anime
-                </Typography>
-                <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                        <SearchIcon />
+        <div className={"relative"}>
+            <AppBar position="sticky">
+                <Toolbar>
+                    <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleHomeClick}
+                    >
+                        <HomeIcon/>
+                    </IconButton>
+                    <Typography className={classes.title} variant="h6" noWrap>
+                        Anime
+                    </Typography>
+                    <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <SearchIcon/>
+                        </div>
+                        <InputBase
+                            placeholder="Search…"
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                            inputProps={{'aria-label': 'search'}}
+                            onKeyPress={handleKeyPress}
+                            onChange={handleSearchChange}
+                        />
                     </div>
-                    <InputBase
-                        placeholder="Search…"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        inputProps={{ 'aria-label': 'search' }}
-                        onKeyPress={handleKeyPress}
-                        onChange={handleSearchChange}
-                    />
-                </div>
-            </Toolbar>
-            {loading && <LinearProgress color={"secondary"}/>}
-        </AppBar>
+                </Toolbar>
+            </AppBar>
+        </div>
     )
 }
 

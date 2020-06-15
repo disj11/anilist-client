@@ -6,7 +6,7 @@ import grey from "@material-ui/core/colors/grey";
 import SimpleAnimations from "./SimpleAnimations";
 
 interface Props {
-    data: TrendData;
+    data: TrendData | undefined;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +23,7 @@ const SimpleTrendAnimations: FunctionComponent<Props> = ({data}) => {
     const season = data?.season?.media || [];
     const nextSeason = data?.nextSeason?.media || [];
     const popular = data?.popular?.media || [];
-    const top = data?.top?.media || [];
+    // const top = data?.top?.media || [];
 
     return (
         <React.Fragment>

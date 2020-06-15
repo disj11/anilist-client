@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
         },
     },
     title: {
-      marginTop: theme.spacing(),
-      marginBottom: theme.spacing(3),
+        marginTop: theme.spacing(),
+        marginBottom: theme.spacing(3),
     },
     imageBox: {
         display: "flex",
@@ -63,27 +63,28 @@ const AnimationDetail: FunctionComponent<Props> = ({id}) => {
 
     const media = data?.Media;
     return (
-        <Layout loading={loading}>
+        <Layout loading={loading} maxWidth={"xl"}>
             <Paper className={classes.bannerWrap} square>
                 {media?.bannerImage && <Image
-                    className={classes.banner}
-                    image={media?.bannerImage}
-                    title={media?.title.userPreferred}
+                    aspectRatio={16 / 4}
+                    src={media?.bannerImage}
                 />}
             </Paper>
             {media && <Container className={classes.container} maxWidth={"lg"}>
                 <Box className={classes.main}>
                     <Box className={classes.imageBox}>
-                        <Image
+                        <img
+                            src={media?.coverImage.large}
+                            alt={media?.title.userPreferred}
                             className={classes.image}
-                            image={media?.coverImage.large}
-                            title={media?.title.userPreferred}
                         />
                     </Box>
                     <Box p={3} display={"flex"} flexDirection={"column"}>
                         <Box flex={1}>
-                            <Typography variant={"subtitle2"}>{media?.format} | episodes {media?.episodes} | {media?.status}</Typography>
-                            <Typography className={classes.title} variant={"h4"}>{media?.title.userPreferred}</Typography>
+                            <Typography variant={"subtitle2"}>{media?.format} |
+                                episodes {media?.episodes} | {media?.status}</Typography>
+                            <Typography className={classes.title}
+                                        variant={"h4"}>{media?.title.userPreferred}</Typography>
                             <Rating name="read-only" size="large"
                                     value={media?.averageScore ? media?.averageScore / 20 : 0} readOnly/>
                         </Box>

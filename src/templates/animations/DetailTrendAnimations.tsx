@@ -6,7 +6,7 @@ import grey from "@material-ui/core/colors/grey";
 import DetailAnimations from "./DetailAnimations";
 
 interface Props {
-    data: TrendData;
+    data: TrendData | undefined;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -23,32 +23,32 @@ const DetailTrendAnimations: FunctionComponent<Props> = ({data}) => {
     const season = data?.season?.media || [];
     const nextSeason = data?.nextSeason?.media || [];
     const popular = data?.popular?.media || [];
-    const top = data?.top?.media || [];
+    // const top = data?.top?.media || [];
 
     return (
         <React.Fragment>
             <Box mb={5}>
-                <Typography className={classes.heading} variant="h6">
+                {data && <Typography className={classes.heading} variant="h6">
                     TRENDING NOW
-                </Typography>
+                </Typography>}
                 <DetailAnimations list={trending}/>
             </Box>
             <Box mb={5}>
-                <Typography className={classes.heading} variant="h6">
+                {data && <Typography className={classes.heading} variant="h6">
                     POPULAR THIS SEASON
-                </Typography>
+                </Typography>}
                 <DetailAnimations list={season}/>
             </Box>
             <Box mb={5}>
-                <Typography className={classes.heading} variant="h6">
+                {data && <Typography className={classes.heading} variant="h6">
                     UPCOMING NEXT SEASON
-                </Typography>
+                </Typography>}
                 <DetailAnimations list={nextSeason}/>
             </Box>
             <Box mb={5}>
-                <Typography className={classes.heading} variant="h6">
+                {data && <Typography className={classes.heading} variant="h6">
                     ALL TIME POPULAR
-                </Typography>
+                </Typography>}
                 <DetailAnimations list={popular}/>
             </Box>
         </React.Fragment>
